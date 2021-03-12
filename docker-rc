@@ -1,0 +1,40 @@
+#!/bin/bash
+
+declare INDEX=0
+declare -a LIST
+mkdir -p /run/nginx
+add_app()
+{
+    app_exec=$@
+    echo "add $@"
+    $app_exec &
+    LIST[$INDEX]=$!
+    INDEX=$((INDEX+1))
+}
+monitor()
+{
+    timeout=${1:-3}
+    while true;do
+        error=0
+        for((i=0;i<INDEX;i++))
+        do
+            [ ! -f /proc/${LIST[i]}/cmdline ] && error=1
+        done
+        if [ $error -eq 1 ];then
+            break
+        fi
+        sleep $timeout
+        ps
+    done
+    
+    echo "error exit, kill exist process first.."
+    for((i=0;i<INDEX;i++))
+    do
+        kill ${LIST[i]} 
+    done
+    echo "exit"    
+}
+add_app "/usr/sbin/in.tftpd -L --secure /var/files"
+add_app "/usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf"
+add_app "/usr/sbin/nginx"
+monitor 100
