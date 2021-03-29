@@ -4,6 +4,16 @@
 ############################*sudo without password###########################
 echo "$USER ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/$USER  
 
+/etc/default/grub
+GRUB_CMDLINE_LINUX=""
+===>
+GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
+sudo update-grub
+
+fstab
+/dev/sdb1              /home         ext4      defaults,noatime        0      2
+
+
 ############################*package###########################
 sudo apt-get update
 sudo apt-get install tmux wget curl
@@ -23,7 +33,7 @@ network:
 
 ###############*install docker###########################
 sudo apt-get remove docker docker-engine docker.io containerd runc
-sudo apt-get update && apt-get -y install \
+sudo apt-get update && sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
     curl \
