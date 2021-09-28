@@ -83,5 +83,5 @@ EOF
 
 tftp/ftp/www:
 docker run -idt --net host --name fileserver --rm -v /file-to-serv:/var/files:ro joely1101/fserver
-
+docker run -idt --net host --restart always --name fileserver -v /www:/var/files:ro joely1101/fserver
 ```
