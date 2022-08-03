@@ -84,4 +84,8 @@ EOF
 tftp/ftp/www:
 docker run -idt --net host --name fileserver --rm -v /file-to-serv:/var/files:ro joely1101/fserver
 docker run -idt --net host --restart always --name fileserver -v /www:/var/files:ro joely1101/fserver
+docker run -idt --net host --restart always --name fileserver -v /home/jlee/tftproot:/var/files:ro -v /etc/localtime:/etc/localtime:ro -e “TZ=Asia/Taipei” joely1101/fserver
+
+#disable cloud-init
+sudo touch /etc/cloud/cloud-init.disabled
 ```
