@@ -10,3 +10,9 @@ EOF
 systemctl restart ser2net
 #test ttyUSB1
 telnet 127.0.0.1 4000
+
+change telnet exit keyword "ctrl + g"
+cat > ~/.telnetrc <<EOF
+DEFAULT
+   set escape ^g
+EOF
