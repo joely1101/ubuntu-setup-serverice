@@ -1,0 +1,12 @@
+apt-get install -y ser2net telnet
+cat > /etc/ser2net.conf << EOF
+BANNER:banner:\r\nser2net port \p device \d [\s] (Debian GNU/Linux)\r\n\r\n
+4000:telnet:3600:/dev/ttyUSB0:115200 -RTSCTS -XONXOFF 1STOPBIT 8DATABITS NONE LOCAL banner
+4001:telnet:3600:/dev/ttyUSB1:115200 -RTSCTS -XONXOFF 1STOPBIT 8DATABITS NONE LOCAL banner
+4002:telnet:3600:/dev/ttyUSB2:115200 -RTSCTS -XONXOFF 1STOPBIT 8DATABITS NONE LOCAL banner
+4003:telnet:3600:/dev/ttyUSB3:115200 -RTSCTS -XONXOFF 1STOPBIT 8DATABITS NONE LOCAL banner
+4004:telnet:3600:/dev/ttyUSB4:115200 -RTSCTS -XONXOFF 1STOPBIT 8DATABITS NONE LOCAL banner
+EOF
+systemctl restart ser2net
+#test ttyUSB1
+telnet 127.0.0.1 4000
