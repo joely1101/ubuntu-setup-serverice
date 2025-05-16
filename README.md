@@ -71,6 +71,7 @@ sudo wget -O /etc/bash_completion.d/dkos.bash_complete https://raw.githubusercon
 ############################*setup ftp/tftp/www/samba server###########################
 samba:
 sudo apt-get install -y samba
+sudo smbpasswd -a $USER
 sudo cat >>/etc/samba/smb.conf<<EOF
 [homes]
    comment = Home Directories
