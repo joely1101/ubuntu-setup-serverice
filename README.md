@@ -58,6 +58,7 @@ chmod +x ~/.local/bin/dkos
 wget -O ~/.local/bin/dkns https://raw.githubusercontent.com/joely1101/tools/master/dkns.sh
 chmod +x ~/.local/bin/dkns
 wget ~/.local/cd_history.sh https://raw.githubusercontent.com/joely1101/tools/master/cd_history.sh
+sudo wget -O /usr/lib/git-core/git-cclone https://raw.githubusercontent.com/joely1101/tools/refs/heads/master/git-cclone
 
 cat >>~/.profile<<EOF
 if [ -f $HOME/.local/cd_history.sh ] ;then
